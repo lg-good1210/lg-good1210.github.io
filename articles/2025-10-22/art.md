@@ -122,23 +122,23 @@ $$\underset{(\text{sine I})}{\underbrace{\lim_{\Delta x \to 0}\sin x\dfrac{(\cos
 
 #### 计算 $(\text{sine I})$
 
-上述中 $\displaystyle\lim_{\Delta x \to 0}\dfrac{\sin \Delta x}{\Delta x}=1$，则 $\displaystyle\lim_{\Delta x \to 0}\dfrac{(\sin \Delta x)^2}{{(\Delta x)}^{2}}=1$.
+上述中 $\displaystyle\lim_{\Delta x \to 0}\dfrac{\sin \Delta x}{\Delta x}=1$，则 $\displaystyle\lim_{\Delta x \to 0}\dfrac{(\sin \Delta x)^2}{(\Delta x)^2}=1$.
 
 将 $(\sin \Delta x)^2$ 替换为 $1-(\cos \Delta x)^2$，则
 
-$$\displaystyle\lim_{\Delta x \to 0}\dfrac{1-(\cos \Delta x)^2}{{(\Delta x)}^{2}}=1$$
+$$\displaystyle\lim_{\Delta x \to 0}\dfrac{1-(\cos \Delta x)^2}{(\Delta x)^2}=1$$
 
 运用平方差公式，得
 
-$$\displaystyle\lim_{\Delta x \to 0}\dfrac{(1-\cos \Delta x)(1+\cos \Delta x)}{{(\Delta x)}^{2}}=1$$
+$$\displaystyle\lim_{\Delta x \to 0}\dfrac{(1-\cos \Delta x)(1+\cos \Delta x)}{(\Delta x)^2}=1$$
 
 展开，得
 
-$$\displaystyle\lim_{\Delta x \to 0}\dfrac{1-\cos \Delta x}{\Delta x}\cdot\lim_{\Delta x \to 0}\dfrac{1+\cos \Delta x}{{\Delta x}}=1$$
+$$\displaystyle\lim_{\Delta x \to 0}\dfrac{1-\cos \Delta x}{\Delta x}\cdot\lim_{\Delta x \to 0}\dfrac{1+\cos \Delta x}{\Delta x}=1$$
 
-将 $\displaystyle\lim_{\Delta x \to 0}\dfrac{1+\cos \Delta x}{{\Delta x}}$ 移至右边，得
+将 $\displaystyle\lim_{\Delta x \to 0}\dfrac{1+\cos \Delta x}{\Delta x}$ 移至右边，得
 
-$$\lim_{\Delta x\to 0}\dfrac{1-\cos\Delta x}{\Delta x}=\lim_{\Delta x\to 0}\dfrac{1}{\frac{1+\cos\Delta x}{\Delta  x}}$$
+$$\lim_{\Delta x\to 0}\dfrac{1-\cos\Delta x}{\Delta x}=\lim_{\Delta x\to 0}\dfrac{1}{\frac{1+\cos\Delta x}{\Delta x}}$$
 
 整理右边，得
 
