@@ -1,27 +1,81 @@
 <!DOCTYPE html>
-<title>good1210 的博客</title>
-<html>
+
+<html lang="zh-cn">
+
+<head>
+    <meta charset="utf-8">
+    <title>The Blog of good1210's</title>
+</head>
+<link rel="stylesheet" href="init/main.css">
 
 <style>
-    body {
-        font-family: Consolas;
-        background-color:rgba(15, 204, 225, 0.897);
-    }
-
-    .the_box_1 {
-        background-color: rgb(111, 168, 219);
-        border-radius: 10px;
-        min-height: 100px;
-        max-width: 40%;
-        border-color:rgb(0, 255, 255);
+    @font-face {
+    font-family: '仿宋';
+    src: url("init/simfang.ttf");
+}
+    @font-face {
+        font-family: 'Consolas normal';
+        src: url("init/consola.ttf");
     }
 </style>
 
-<body>
-    <h1 style="text-align: center; color:rgb(12, 28, 246)">good1210 的博客</h1>
-    <div class="the_box_1">
-        TEXt
-    </div>
+<body style="font-family: 'Consolas normal', '仿宋';">
+    <ul id="fileList"></ul>
+    <h1 style="text-align: center; color:rgb(255, 255, 255)">good1210 的博客</h1>
+    <div class="good-box">
+    <h2 style="text-align: center; color: black">个人简介</h2>
+    <div class="text-card">
+        我的洛谷账号：<a href="https://www.luogu.com.cn/user/1497153">good1210</a><br>
+        我的QQ：3922191797
+    </div></div><br>
+    <div class="good-box">
+    <h2 style="text-align: center; color:black">最近编写文章</h2>
+    <div class="article-box" data-article1 id="article1">
+        <h3 data-article1h3><a href="https://www.luogu.com.cn" id="article1-h3">尚未文章</a></h3>
+        <div id="article1-desc">尚未文章</div>
+    </div><br>
+    <div class="article-box" data-article2 id="article2">
+        <h3 data-article2h3 id="article2-h3"><a href="https://www.luogu.com.cn" id="article1-h3">尚未文章</a></h3>
+        <div id="article2-desc">尚未文章</div>
+    </div><br>
+    <div class="article-box" data-article3>
+        <h3 data-article3h3><a href="https://www.luogu.com.cn" id="article1-h3">尚未文章</a></h3>
+        <div id="article3-desc">尚未文章</div>
+    </div><br>
+    <div class="article-box" data-article4>
+        <h3 data-article4h3><a href="https://www.luogu.com.cn" id="article1-h3">尚未文章</a></h3>
+        <div id="article4-desc">尚未文章</div>
+    </div><br></div>
+    <h2 style="text-align: center; color:rgb(255, 255, 255)">Online Judge</h2>
 </body>
+
+<script>
+    var obj1 = document.getElementById("article1-h3");
+    var obj2 = document.getElementById("article2-h3");
+    var obj3 = document.getElementById("article3-h3");
+    var obj4 = document.getElementById("article4-h3");
+    obj1.href = "", obj2.href = "", obj3.href = "", obj4.href = "";
+    var text_obj1 = documnet.getElementById("article1-desc");
+    var text_obj2 = documnet.getElementById("article2-desc");
+    var text_obj3 = documnet.getElementById("article3-desc");
+    var text_obj4 = documnet.getElementById("article4-desc");
+    var filelist = {};
+
+    function getFileList() {
+        var fileList = event.target.files;
+        for (var i = 0; i < fileList.length; i++) {
+            filelist.append(fileList[i].name);
+        }
+        return;
+    }
+
+    function updateArticle() {
+        for (var i = 0; i < filelist.length(); i++) {
+            ;
+        }
+    }
+    getFileList();
+    updateArticle();
+</script>
 
 </html>

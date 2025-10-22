@@ -1,0 +1,87 @@
+@font-face {
+    font-family: '楷体';
+    src: url("init/simkai.ttf");
+}
+
+@font-face {
+    font-family: '黑体';
+    src: url("init/simhei.ttf");
+}
+
+@font-face {
+    font-family: '仿宋';
+    src: url("init/simfang.ttf");
+}
+
+@font-face {
+    font-family: 'Consolas normal';
+    src: url("init/consola.ttf");
+}
+
+body {
+    font-family: 'Consolas normal', '仿宋';
+    background-image: url("https://cdn.jsdelivr.net/gh/Acerkaio/ImageHost/test/6301896a16f2c2beb1299954.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.good-box {
+    opacity: 0.9;
+    margin: 0 auto;
+    width: 85%;
+    background-color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    border-radius: 10px;
+}
+
+.article-box {
+    opacity: 0.7;
+    margin: 0 auto;
+    max-width: 97%;
+    background-color: cyan;
+    border-radius: 10px;
+    min-height: 100px;
+    border-color: cyan;
+    border-width: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.text-card {
+    margin: 0 auto;
+    background-color: cyan;
+    border-radius: 10px;
+    min-height: 100px;
+    max-width: 97%;
+    border-color: cyan;
+    border-width: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    line-height: 1.25;
+}
+
+.article-box:hover {
+    opacity: 1;
+    transform: translateY(-4px) rotate(0deg);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.text-card:hover {
+    opacity: 1;
+    transform: translateY(-4px) rotate(0deg);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
