@@ -85,3 +85,22 @@ body {
     transform: translateY(-4px) rotate(0deg);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 }
+
+.back-btn {
+  display: inline-block;
+  margin-bottom: 30px;
+  color: #3182ce;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.back-btn:hover {
+  text-decoration: underline;
+}
+
+.article-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 60px;
+}

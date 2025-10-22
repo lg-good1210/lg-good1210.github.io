@@ -12,7 +12,7 @@
     @font-face {
     font-family: '仿宋';
     src: url("init/simfang.ttf");
-}
+    }
     @font-face {
         font-family: 'Consolas normal';
         src: url("init/consola.ttf");
@@ -21,6 +21,7 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
 <body style="font-family: 'Consolas normal', '仿宋';">
     <ul id="fileList"></ul>
@@ -33,52 +34,92 @@
     </div></div><br>
     <div class="good-box">
     <h2 style="text-align: center; color:black">文章列表</h2>
-    <div class="article-box" data-article1 id="article1">
-        <h3 data-article1h3><a href="https://www.luogu.com.cn" id="article1-h3">尚未文章</a></h3>
-        <div id="article1-desc">尚未文章</div>
-    </div><br>
-    <div class="article-box" data-article2 id="article2">
-        <h3 data-article2h3 id="article2-h3"><a href="https://www.luogu.com.cn" id="article1-h3">尚未文章</a></h3>
-        <div id="article2-desc">尚未文章</div>
-    </div><br>
-    <div class="article-box" data-article3>
-        <h3 data-article3h3><a href="https://www.luogu.com.cn" id="article1-h3">尚未文章</a></h3>
-        <div id="article3-desc">尚未文章</div>
-    </div><br>
-    <div class="article-box" data-article4>
-        <h3 data-article4h3><a href="https://www.luogu.com.cn" id="article1-h3">尚未文章</a></h3>
-        <div id="article4-desc">尚未文章</div>
-    </div><br></div>
+    <div class="article-list" id="articleList">
+        <!-- 文章卡片将通过JS动态生成 -->
+        <div class="loading">加载文章中...</div>
+    </div></div>
     <h2 style="text-align: center; color:rgb(255, 255, 255)">Online Judge</h2>
 </body>
 
 <script>
-    var obj1 = document.getElementById("article1-h3");
-    var obj2 = document.getElementById("article2-h3");
-    var obj3 = document.getElementById("article3-h3");
-    var obj4 = document.getElementById("article4-h3");
-    obj1.href = "", obj2.href = "", obj3.href = "", obj4.href = "";
-    var text_obj1 = documnet.getElementById("article1-desc");
-    var text_obj2 = documnet.getElementById("article2-desc");
-    var text_obj3 = documnet.getElementById("article3-desc");
-    var text_obj4 = documnet.getElementById("article4-desc");
-    var filelist = {};
+    let articles = [];
 
-    function getFileList() {
-        var fileList = event.target.files;
-        for (var i = 0; i < fileList.length; i++) {
-            filelist.append(fileList[i].name);
+    // 初始化：加载所有文章信息
+    async function init() {
+      const articleListEl = document.getElementById('articleList');
+      
+      try {
+        // 注意：GitHub Pages 无法直接列出文件夹，这里需要手动维护文章路径列表
+        // 如果你有新文章，需要在这里添加日期文件夹名称
+        const dateFolders = [
+          '2025-10-22', 
+          // 新增文章时添加新的日期文件夹
+        ];
+
+        // 遍历所有日期文件夹，读取文章信息
+        for (const folder of dateFolders) {
+          const infoUrl = `article/${folder}/info.json`;
+          const response = await fetch(infoUrl);
+          
+          if (!response.ok) throw new Error(`无法加载 ${folder} 的信息`);
+          
+          const info = await response.json();
+          // 补充日期信息（从文件夹名提取）
+          articles.push({
+            //...info,
+            date: folder, // 日期格式：YYYY-MM-DD
+            folder: folder // 用于跳转路径
+          });
         }
+
+        // 按日期倒序排序（最新的在前）
+        articles.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        // 渲染文章列表
+        renderArticleList();
+
+      } catch (error) {
+        articleListEl.innerHTML = `<div class="error">加载失败：${error.message}</div>`;
+        console.error('加载文章出错：', error);
+      }
+    }
+
+    // 渲染文章卡片列表
+    function renderArticleList() {
+      const articleListEl = document.getElementById('articleList');
+      articleListEl.innerHTML = '';
+
+      if (articles.length === 0) {
+        articleListEl.innerHTML = '<div>暂无文章</div>';
         return;
+      }
+
+      articles.forEach(article => {
+        const card = document.createElement('div');
+        card.className = 'article-card';
+        // 点击卡片跳转到文章页，通过URL参数传递日期文件夹名
+        card.onclick = () => {
+          window.location.href = `article.html?folder=${article.folder}`;
+        };
+
+        card.innerHTML = `
+          <div class="date">${formatDate(article.date)}</div>
+          <div class="title">${article.title}</div>
+          <div class="excerpt">${article.excerpt}</div>
+        `;
+
+        articleListEl.appendChild(card);
+      });
     }
 
-    function updateArticle() {
-        for (var i = 0; i < filelist.length(); i++) {
-            ;
-        }
+    // 格式化日期（YYYY-MM-DD → 年月日）
+    function formatDate(dateStr) {
+      const date = new Date(dateStr);
+      return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
     }
-    getFileList();
-    updateArticle();
+
+    // 页面加载完成后初始化
+    window.onload = init;
 </script>
 
 </html>
