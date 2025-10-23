@@ -58,7 +58,7 @@ $$
 
 欧拉定理是将费马小定理推广到了一般的模数，但仍要求底数与指数互质。
 
-具体地，对于整数 $m>0$ 与整数 $a$ 且 $\gcd(a,m)=1$，都有 $a^{{\varphi}(m)}\equiv 1\pmod{m}$。
+具体地，对于整数 $m>0$ 与整数 $a$ 且 $\gcd(a,m)=1$，都有 $a^{\varphi(m)}\equiv 1\pmod{m}$。
 
 其中 $\varphi(n)$ 为欧拉函数，表示小于等于 $n$ 与 $n$ 互质的数的个数。
 
@@ -81,7 +81,7 @@ $$S=\{ar\bmod m:r\in\mathbb{S}\}$$
 易验证 $\gcd(ar,m)=1$ 且对于不同的 $r_1,r_2\in S$ 对应的 $ar_1\bmod m$ 与 $ar_2\bmod m$ 也一定不同。因此：
 
 $$
-\prod_{r\in S}r\equiv\prod_{r\in S}ar=a^{\varphi{(m)}}\prod_{r\in S}r\pmod{m}
+\prod_{r\in S}r\equiv\prod_{r\in S}ar=a^{\varphi(m)}\prod_{r\in S}r\pmod{m}
 $$
 
 再次重复之前的证明过程，只要消去掉 $\displaystyle\prod_{r\in S}r$ 即可得到 $a^{\varphi(m)}\equiv 1\pmod{m}$。
