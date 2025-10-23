@@ -11,33 +11,43 @@
     <link rel="stylesheet" href="init/main.css">
 </head>
 
-
-<style>
-    @font-face {
-    font-family: '楷体';
-    src: url("init/simkai.ttf");
-}
-    @font-face {
-        font-family: 'Consolas normal';
-        src: url("init/consola.ttf");
-    }
-</style>
-
 <body style="font-family: 'Consolas normal', '楷体';">
-    <ul id="fileList"></ul>
-    <h1 style="text-align: center; color:rgb(255, 255, 255)">博客：good1210</h1>
-    <div class="good-box">
-    <h2 style="text-align: center; color: black">个人简介</h2>
+    <ul class="main-container">
+        <li><a>The Blog of Github Pages of Good1210's, good1210 on Luogu(洛谷)</a></li>
+        <li><a href="index.html">主页</a></li>
+        <li><a href="index.html#about">个人简介、信息</a></li>
+        <li><a href="index.html#articles">文章列表</a></li>
+    </ul>
+    <!--
+    <div class="main-container">
+        <img src="https://cdn.luogu.com.cn/upload/usericon/1497153.png"">
+
+        <button onclick="window.location.href='index.html'" class="btn">good1210 的博客（The blog of good1210's）</button>
+
+        <button onclick="window.location.href='index.html'" class="btn">博客主页</button>
+
+        <button onclick="window.location.href='https:\/\/www.luogu.com.cn/user/1497153'" class="btn">洛谷账号：good1210</button>
+    </div>
+    -->
+    <h1 style="text-align: center; color:black">博客：good1210</h1>
+    <div class="good-box" id="about">
+    <h2 style="text-align: center; color: black">关于我</h2>
     <div class="text-card">
-        我的洛谷账号：<a href="https://www.luogu.com.cn/user/1497153">good1210</a><br>
         我的QQ：3922191797
     </div></div><br>
-    <div class="good-box">
-    <h2 style="text-align: center; color:black">文章列表</h2>
-    <div class="article-box" id="articleList">
-        <!-- 文章卡片将通过JS动态生成 -->
-        <div class="loading">加载文章中...</div>
-    </div></div>
+    <div class="good-box" id="articles">
+        <h2 style="text-align: center; color:black">文章列表</h2>
+        <div id="articleList">
+            <div class="article-box">
+                <!-- 文章卡片将通过JS动态生成 -->
+                <div class="loading">加载文章中...</div>
+            </div>
+        </div>
+    </div>
+    <ul id="fileList"></ul>
+    <div style="text-align: center; color:rgb(150, 150, 150);">
+        Created by Github Pages, modified by Good1210 on Github/Luogu.
+    </div>
 </body>
 
 <script>
@@ -51,7 +61,14 @@
         // 注意：GitHub Pages 无法直接列出文件夹，这里需要手动维护文章路径列表
         // 如果你有新文章，需要在这里添加日期文件夹名称
         const dateFolders = [
-          '2025-10-22', 
+          '2025-07-11-10-17', 
+          '2025-09-21-14-53',
+          '2025-09-29-06-53',
+          '2025-09-28-07-14',
+          '2025-09-22-08-29',
+          '2025-09-21-14-23',
+          '2025-08-25-19-31',
+          '2025-09-08-14-25'
           // 新增文章时添加新的日期文件夹
         ];
 
@@ -102,8 +119,10 @@
         };
 
         card.innerHTML = `
+            <div class="article-box">
           <h3 style="color: white">${article.title}</h3>
-          <div style="color: white">总结：${article.excerpt}——${formatDate(article.date)}</div>
+          <div style="color: white">文章概括：${article.excerpt}——${formatDate(article.date)}</div>
+          </div><br>
         `;
 
         articleListEl.appendChild(card);
@@ -111,10 +130,39 @@
     }
 
     // 格式化日期（YYYY-MM-DD → 年月日）
-    function formatDate(dateStr) {
-      const date = new Date(dateStr);
-      return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
-    }
+    // 格式化日期：YYYY-MM-DD-HOUR-MIN → 年月日时分（例：2025-10-23-14-30 → 2025年10月23日 14:30）
+function formatDate(dateStr) {
+  // 正则匹配格式：YYYY-MM-DD-HH-mm（允许数字间的分隔符为 - 或 _）
+  const regex = /^(\d{4})[-_](\d{2})[-_](\d{2})[-_](\d{2})[-_](\d{2})$/;
+  const match = dateStr.match(regex);
+
+  if (!match) {
+    // 格式不匹配时，返回原始字符串（避免显示异常）
+    return dateStr;
+  }
+
+  // 提取匹配到的年、月、日、时、分
+  const year = match[1];
+  const month = parseInt(match[2], 10); // 转为数字（去除前导0，如 09 → 9）
+  const day = parseInt(match[3], 10);
+  const hour = match[4];
+  const minute = match[5];
+
+  // 验证日期合法性（避免 2025-13-32 这种无效日期）
+  const validDate = new Date(year, month - 1, day, hour, minute);
+  if (
+    validDate.getFullYear() != year ||
+    validDate.getMonth() + 1 != month ||
+    validDate.getDate() != day ||
+    validDate.getHours() != hour ||
+    validDate.getMinutes() != minute
+  ) {
+    return dateStr; // 日期无效时返回原始字符串
+  }
+
+  // 格式化输出（例：2025年10月23日 14:30）
+  return `${year}年${month}月${day}日 ${hour}:${minute}`;
+}
 
     // 页面加载完成后初始化
     window.onload = init;

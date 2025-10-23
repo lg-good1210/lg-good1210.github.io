@@ -19,8 +19,10 @@
 }
 
 body {
+    margin-top: 65px;
     font-family: 'Consolas normal', '仿宋';
-    background-image: url("https://cdn.jsdelivr.net/gh/Acerkaio/ImageHost/test/6301896a16f2c2beb1299954.jpg");
+    /*background-image: url("https://cdn.jsdelivr.net/gh/Acerkaio/ImageHost/test/6301896a16f2c2beb1299954.jpg");*/
+    background-color: rgb(230,230,230);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -89,9 +91,10 @@ body {
 .back-btn {
   display: inline-block;
   margin-bottom: 30px;
-  color: #3182ce;
+  color: #0084ff;
   text-decoration: none;
   font-size: 1rem;
+  background-color: rbga(100,200,244, 0.1);
 }
 
 .back-btn:hover {
@@ -103,4 +106,56 @@ body {
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 30px;
   margin-bottom: 60px;
+}
+
+.main-container {
+    z-index: 999;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #e7e7e7;
+    background-color: #f3f3f3;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: #666;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: #ddd;
+}
+
+li a.active {
+    color: white;
+    background-color: #4CAF50;
+}
+
+.btn {
+    border-radius: 8px;
+    background-color: rgb(255, 255, 255);
+    border-width: 1px;
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn:hover {
+    opacity: 1;
+    transform: translateY(-1px) rotate(0deg);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 }
