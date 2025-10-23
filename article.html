@@ -2,27 +2,29 @@
 <html lang="zh-cn">
 <head>
     <meta charset="utf-8">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js"></script>
     <title>The Blog of good1210's</title>
 </head>
 <link rel="stylesheet" href="init/main.css">
 <style>
     @font-face {
-    font-family: '仿宋';
-    src: url("init/simfang.ttf");
-    }
+    font-family: '楷体';
+    src: url("init/simkai.ttf");
+}
     @font-face {
         font-family: 'Consolas normal';
         src: url("init/consola.ttf");
     }
 </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js"></script>
 
-<body>
+<body style="font-family: 'Consolas normal', '楷体';">
     <a href="index.html" class="back-btn">返回首页</a>
     <div class="date" id="articleDate"></div>
-    <h1 style="text-align: center;" class="title" id="articleTitle"></h1>
-    <div class="article-content">
+    <h1 style="text-align: center; color: white;" class="title" id="articleTitle"></h1>
+    <div style="color: white;" class="article-content">
       <div class="markdown" id="articleContent">
         <!-- Markdown内容将在这里渲染 -->
         <div class="loading">加载文章中...</div>
@@ -61,6 +63,15 @@
         document.getElementById('articleDate').textContent = formatDate(folder);
         // 将Markdown转换为HTML并渲染
         document.getElementById('articleContent').innerHTML = marked.parse(markdownContent);
+
+        // 解析完成后，调用KaTeX自动渲染页面中的公式
+renderMathInElement(document.getElementById('articleContent'), {
+  delimiters: [
+    { left: '$$', right: '$$', display: true }, // 块级公式
+    { left: '$', right: '$', display: false } // 行内公式
+  ],
+  throwOnError: false
+});
 
         // 设置页面标题
         document.title = `${info.title} - 我的博客`;

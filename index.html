@@ -5,27 +5,27 @@
 <head>
     <meta charset="utf-8">
     <title>The Blog of good1210's</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js"></script>
+    <link rel="stylesheet" href="init/main.css">
 </head>
-<link rel="stylesheet" href="init/main.css">
+
 
 <style>
     @font-face {
-    font-family: '仿宋';
-    src: url("init/simfang.ttf");
-    }
+    font-family: '楷体';
+    src: url("init/simkai.ttf");
+}
     @font-face {
         font-family: 'Consolas normal';
         src: url("init/consola.ttf");
     }
 </style>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-
-<body style="font-family: 'Consolas normal', '仿宋';">
+<body style="font-family: 'Consolas normal', '楷体';">
     <ul id="fileList"></ul>
-    <h1 style="text-align: center; color:rgb(255, 255, 255)">good1210 的博客</h1>
+    <h1 style="text-align: center; color:rgb(255, 255, 255)">博客：good1210</h1>
     <div class="good-box">
     <h2 style="text-align: center; color: black">个人简介</h2>
     <div class="text-card">
@@ -34,11 +34,10 @@
     </div></div><br>
     <div class="good-box">
     <h2 style="text-align: center; color:black">文章列表</h2>
-    <div class="article-list" id="articleList">
+    <div class="article-box" id="articleList">
         <!-- 文章卡片将通过JS动态生成 -->
         <div class="loading">加载文章中...</div>
     </div></div>
-    <h2 style="text-align: center; color:rgb(255, 255, 255)">Online Judge</h2>
 </body>
 
 <script>
@@ -66,7 +65,7 @@
           const info = await response.json();
           // 补充日期信息（从文件夹名提取）
           articles.push({
-            //...info,
+            ...info,
             date: folder, // 日期格式：YYYY-MM-DD
             folder: folder // 用于跳转路径
           });
@@ -103,9 +102,8 @@
         };
 
         card.innerHTML = `
-          <div class="date">${formatDate(article.date)}</div>
-          <div class="title">${article.title}</div>
-          <div class="excerpt">${article.excerpt}</div>
+          <h3 style="color: white">${article.title}</h3>
+          <div style="color: white">总结：${article.excerpt}——${formatDate(article.date)}</div>
         `;
 
         articleListEl.appendChild(card);
