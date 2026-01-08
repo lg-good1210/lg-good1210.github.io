@@ -1,1 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>good1210的博客 --- 主页</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style1.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- 引入图标库 -->
+</head>
+
+<body>
+    <div class="nav">
+        <ul>
+            <li><a class="active" href="index.html">
+                    <span><i class="fa fa-home"></i></span>
+                    <span class="textsss">主页</span>
+                </a></li>
+            <li><a href="about.html">
+                    <span><i class="fa fa-address-book"></i></span>
+                    <span class="textsss">关于我</span>
+                </a></li>
+            <li><a href="article.html">
+                    <span><i class="fa fa-tasks"></i></span>
+                    <span class="textsss">文章列表</span>
+                </a></li>
+            <li><a href="record.html">
+                    <span><i class="fa fa-th-list"></i></span>
+                    <span class="textsss">个人记录</span>
+                </a></li>
+            <li><a href="note.html">
+                    <span><i class="fa fa-tag"></i></span>
+                    <span class="textsss">大事记</span>
+                </a></li>
+            <li><a href="log.html">
+                    <span><i class="fa fa-file"></i></span>
+                    <span class="textsss">集训日志</span>
+                </a></li>
+            <li><a href="resources.html">
+                    <span><i class="fa fa-sticky-note-o"></i></span>
+                    <span class="textsss">公共资源</span>
+                </a></li>
+            <li><a href="code.html">
+                    <span><i class="fa fa-code"></i></span>
+                    <span class="textsss">C++ 算法模板</span>
+                </a></li>
+        </ul>
+    </div>
+    <div class="except-nav">
+        <div class="title"><h1>good1210 的博客</h1></div>
+        <div class="block">
+            <h3>实时时钟</h3>
+            <div class="clock">
+                <div class="flip" id="h1">
+                    <div class="digital front" data-num="0"></div>
+                    <div class="digital back" data-num="0"></div>
+                </div>
+                <div class="flip" id="h2">
+                    <div class="digital front" data-num="0"></div>
+                    <div class="digital back" data-num="0"></div>
+                </div>
+                <span class="divider">:</span>
+                <div class="flip" id="m1">
+                    <div class="digital front" data-num="0"></div>
+                    <div class="digital back" data-num="0"></div>
+                </div>
+                <div class="flip" id="m2">
+                    <div class="digital front" data-num="0"></div>
+                    <div class="digital back" data-num="0"></div>
+                </div>
+                <span class="divider">:</span>
+                <div class="flip" id="s1">
+                    <div class="digital front" data-num="0"></div>
+                    <div class="digital back" data-num="0"></div>
+                </div>
+                <div class="flip" id="s2">
+                    <div class="digital front" data-num="0"></div>
+                    <div class="digital back" data-num="0"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    const flipElems = [
+        document.getElementById('h1'), document.getElementById('h2'),
+        document.getElementById('m1'), document.getElementById('m2'),
+        document.getElementById('s1'), document.getElementById('s2')
+    ];
+    function setNum(elem, val) {
+        const front = elem.querySelector('.front');
+        const back = elem.querySelector('.back');
+        if (front.dataset.num === val) return;
+        back.dataset.num = val;
+        elem.classList.add('running');
+        setTimeout(() => {
+            front.dataset.num = val;
+            elem.classList.remove('running');
+        }, 300);
+    }
+    function tick() {
+        const t = new Date();
+        const h = t.getHours().toString().padStart(2, '0');
+        const m = t.getMinutes().toString().padStart(2, '0');
+        const s = t.getSeconds().toString().padStart(2, '0');
+        setNum(flipElems[0], h[0]);
+        setNum(flipElems[1], h[1]);
+        setNum(flipElems[2], m[0]);
+        setNum(flipElems[3], m[1]);
+        setNum(flipElems[4], s[0]);
+        setNum(flipElems[5], s[1]);
+    }
+    setInterval(tick, 1000);
+    tick(); // 初始化
+</script>
+
+</html>

@@ -1,0 +1,235 @@
+@keyframes fadein {
+    0% {
+        opacity: 0;
+        transform: translateY(-100px);
+    }
+    100% {
+        opacity: 0.9;
+        transform: translateY(50%);
+    }
+}
+
+body {
+    display: flex;
+    opacity: 0.9;
+    background-image: url('/datas/background1.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.except-nav {
+    /* animation: fadein 0.7s; */
+    /* display: flex;
+    justify-content: center; 水平居中
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    margin-top: 30px; */
+    position: absolute;
+    margin-left: 220px;   /* 与导航栏宽度相同 */
+    width: calc(100% - 220px);
+}
+
+/* 导航栏样式 */
+.nav {
+    width: 200px;
+    background-color: #ffffff;
+    height: 100%;
+    position: sticky;
+    /* 粘性定位，滚动时保持在左侧 */
+    top: 0;
+    margin-right: 20px;
+}
+
+.nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #ffffff;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+    border-right-width: 1px;
+    border-right-color: #dddddd;
+    border-right-style: solid;
+}
+
+.nav li {
+    margin-top: 5px;
+    padding-top: 5px;
+}
+
+.nav li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.nav li a.active {
+    /* 当前的 */
+    color: #07d0f8;
+}
+
+.nav li a:hover {
+    /* 被选中的 */
+    background-color: #e5e5e5;
+}
+
+a i {
+    font: size 18px;
+}
+
+.textsss {
+    margin-left: 5px;
+}
+
+/* OI 名片核心样式 */
+.oi-card {
+    width: 100%;
+    max-width: 750px;
+    /* 限制最大宽度，避免桌面端过宽 */
+    background-color: #ffffff;
+    border-radius: 16px;
+    /* 圆角效果，更美观 */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    /* 阴影，提升立体感 */
+    padding: 30px;
+    text-align: center;
+    border-top: 4px solid #00a1fe;
+    /* 顶部呼应导航栏风格 */
+    opacity: 1;
+    transition: opacity 1s;
+}
+
+/* 头像样式 */
+.oi-card .avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    /* 圆形头像 */
+    object-fit: cover;
+    /* 保持图片比例，不拉伸 */
+    border: 4px solid #f0f0f0;
+    margin-bottom: 20px;
+}
+
+/* 昵称样式 */
+.oi-card .nickname {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 8px;
+}
+
+/* OI 身份标签 */
+.oi-card .identity {
+    font-size: 16px;
+    color: #666666;
+    margin-bottom: 20px;
+}
+
+/* 竞赛荣誉标签组 */
+.oi-card .honor-tags {
+    display: flex;
+    flex-wrap: wrap;
+    /* 自动换行，适配移动端 */
+    justify-content: center;
+    gap: 8px;
+    /* 标签之间的间距 */
+    margin-bottom: 25px;
+}
+
+/* 单个荣誉标签 */
+.oi-card .honor-tag {
+    background-color: #fdf2f2;
+    color: #ed0000;
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* 技术栈区域 */
+.oi-card .tech-stack {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 12px;
+    text-align: left;
+}
+
+/* 技术栈标题 */
+.oi-card .tech-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+/* 标题图标 */
+.oi-card .tech-title i {
+    margin-right: 8px;
+    color: #ed0000;
+}
+
+/* 技术栈内容 */
+.oi-card .tech-content {
+    font-size: 14px;
+    color: #666666;
+    line-height: 1.6;
+}
+
+.oi-card .account {
+    color: #666;
+    font-size: 14px;
+}
+
+.oi-card .social-links {
+    margin-top: 25px;
+}
+
+.oi-card .accounts {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+/* 表格元素 */
+table {
+    /* position: relative; */
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.block {
+    background-color: white;
+    padding: 25px;
+    padding-top: 5px;
+    border-radius: 10px;
+    text-align: center;
+    width: 700px;
+}
+
+.title {
+    text-align: center;
+    margin: auto;
+}

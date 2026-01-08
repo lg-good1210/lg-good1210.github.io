@@ -1,0 +1,85 @@
+.clock {
+    display: flex;
+    gap: 18px;
+}
+
+/* 单个翻页单元 */
+.flip {
+    position: relative;
+    width: 40px;
+    height: 60px;
+    font-size: 40px;
+    line-height: 60px;
+    text-align: center;
+    color: #fff;
+    background: #222;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+    perspective: 400px;
+}
+
+/* 上下半区 */
+.flip .digital::before,
+.flip .digital::after {
+    content: attr(data-num);
+    position: absolute;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    background: #222;
+}
+
+.flip .digital::before {
+    top: 0;
+    bottom: 50%;
+    border-radius: 10px 10px 0 0;
+    border-bottom: 1px solid #000;
+}
+
+.flip .digital::after {
+    top: 50%;
+    bottom: 0;
+    line-height: 0;
+    border-radius: 0 0 10px 10px;
+}
+
+/* 背面区 */
+.flip .back::after {
+    z-index: 2;
+    transform-origin: 50% 0;
+    transform: rotateX(180deg);
+}
+
+.flip .front::before {
+    z-index: 3;
+}
+
+/* 翻页动画 */
+.flip.running .front::before {
+    transform-origin: 50% 100%;
+    animation: flipDown .6s ease-in-out;
+    backface-visibility: hidden;
+}
+
+.flip.running .back::after {
+    animation: flipUp .6s ease-in-out;
+}
+
+@keyframes flipDown {
+    to {
+        transform: rotateX(-180deg);
+    }
+}
+
+@keyframes flipUp {
+    to {
+        transform: rotateX(0);
+    }
+}
+
+/* 分隔符 */
+.divider {
+    font-size: 35px;
+    color: #5c5c5c;
+    line-height: 60px;
+}
