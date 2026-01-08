@@ -12,6 +12,7 @@
 body {
     display: flex;
     opacity: 0.9;
+    /* 添加背景图片 */
     background-image: url('/datas/background1.png');
     background-repeat: no-repeat;
     background-size: cover;
@@ -30,6 +31,7 @@ body {
     position: absolute;
     margin-left: 220px;   /* 与导航栏宽度相同 */
     width: calc(100% - 220px);
+    height: 100vh;
 }
 
 /* 导航栏样式 */
@@ -102,7 +104,6 @@ a i {
     text-align: center;
     border-top: 4px solid #00a1fe;
     /* 顶部呼应导航栏风格 */
-    opacity: 1;
     transition: opacity 1s;
 }
 
