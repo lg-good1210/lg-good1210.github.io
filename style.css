@@ -1,47 +1,55 @@
-@keyframes fadein {
-    0% {
-        opacity: 0;
-        transform: translateY(-100px);
-    }
-    100% {
-        opacity: 0.9;
-        transform: translateY(50%);
-    }
-}
-
 body {
-    display: flex;
+    /* display: flex; */
+    width: 100vw;
+    margin: 0;
     opacity: 0.9;
     /* 添加背景图片 */
-    background-image: url('/datas/background1.png');
+    /* background-image: url('/datas/background1.png'); */
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+    /* color: white; */
 }
 
 .except-nav {
-    /* animation: fadein 0.7s; */
-    /* display: flex;
-    justify-content: center; 水平居中
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 30px;
-    margin-top: 30px; */
     position: absolute;
-    margin-left: 220px;   /* 与导航栏宽度相同 */
-    width: calc(100% - 220px);
-    height: 100vh;
+    top: 0;
+    left: 220px;
+    /* 用 left 而不是 margin-left */
+    width: calc(100vw - 220px);
+    min-height: 100vh;
+    /* 允许内容撑高，用 min-height 而不是 height */
+
+    /* 关键：让每一行都各自居中 */
+    display: flex;
+    flex-direction: column;
+    /* 主轴改成纵向 → 一行一个块 */
+    align-items: center;
+    /* 交叉轴（横向）居中 → 每块水平居中 */
+    row-gap: 20px;
+    /* 行间距 */
+    padding: 20px 0;
+    /* 上下留点呼吸空间 */
+}
+
+.expect-nav>* {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    /* 自动换行，适配移动端 */
+    justify-content: center;
+    margin-bottom: 20px;
 }
 
 /* 导航栏样式 */
 .nav {
-    width: 200px;
-    background-color: #ffffff;
-    height: 100%;
-    position: sticky;
-    /* 粘性定位，滚动时保持在左侧 */
+    position: fixed;
     top: 0;
+    left: 0;
+    width: 200px;
+    height: 100vh;
+    background-color: #ffffff;
     margin-right: 20px;
 }
 
@@ -49,6 +57,8 @@ body {
     list-style-type: none;
     margin: 0;
     padding: 0;
+    left: 0;
+    top: 0;
     width: 200px;
     background-color: #ffffff;
     position: fixed;
@@ -104,7 +114,6 @@ a i {
     text-align: center;
     border-top: 4px solid #00a1fe;
     /* 顶部呼应导航栏风格 */
-    transition: opacity 1s;
 }
 
 /* 头像样式 */
@@ -228,9 +237,46 @@ th {
     border-radius: 10px;
     text-align: center;
     width: 700px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 2px 2px 4px 4px rgba(0, 213, 255, 0.6);
 }
 
 .title {
     text-align: center;
-    margin: auto;
+    margin: 10px;
+}
+
+.list {
+    border-radius: 20px;
+    background-color: white;
+    text-align: center;
+    width: 60%;
+}
+
+.list li {
+    margin: 40px;
+    font-size: 18px;
+    list-style-type: none;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px 4px rgba(0, 213, 255, 0.6);
+    text-align: left;
+}
+
+.markdownViewer {
+    /* 在父级（flex 容器）上写 */
+    position: absolute;
+    left: 0;
+    /* 贴左边缘 */
+    width: 100%;
+}
+
+.article-tag {
+    padding: 4px;
+    border-width: 6px;
+    border-style: solid;
+    background-color: #00a1fe20;
+    border-color: #00a1fe10;
+    border-radius: 8px;
+    margin: 4px;
 }

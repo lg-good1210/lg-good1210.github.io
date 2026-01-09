@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cn">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- 引入图标库 -->
-    <title>good1210的博客 --- 公共资源</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <title>good1210的博客 --- 文章列表</title>
 </head>
+
 <body>
     <div class="nav">
         <ul>
@@ -19,7 +22,7 @@
                     <span><i class="fa fa-address-book"></i></span>
                     <span class="textsss">关于我</span>
                 </a></li>
-            <li><a href="article.html">
+            <li><a class="active" href="article.html">
                     <span><i class="fa fa-tasks"></i></span>
                     <span class="textsss">文章列表</span>
                 </a></li>
@@ -35,7 +38,7 @@
                     <span><i class="fa fa-file"></i></span>
                     <span class="textsss">集训日志</span>
                 </a></li>
-            <li><a class="active" href="resources.html">
+            <li><a href="resources.html">
                     <span><i class="fa fa-sticky-note-o"></i></span>
                     <span class="textsss">公共资源</span>
                 </a></li>
@@ -45,5 +48,48 @@
                 </a></li>
         </ul>
     </div>
+    <div class="except-nav" data-noecpt>
+        <div class="markdownViewer" id="article">
+            <h3>加载可能较慢，请耐心等待……</h3>
+        </div>
+    </div>
 </body>
+<script type="module">
+    import { renderMarkdown } from './lib/mdx.js';
+    import { getYamlMeta } from './lib/mdx.js';
+    const mdfilename = new URLSearchParams(location.search).get('mdfile');
+    const postContent = await fetch(`./articles/${mdfilename}`);
+    if (!postContent.ok) throw new Error('fetch failed');
+    const md = await postContent.text();
+
+    var parsedJSON = await getYamlMeta(md);
+    var title = '无标题';
+    var date = '未知日期';
+    var tags = ['无标签'];
+    if (parsedJSON?.title) {
+        title = parsedJSON.title;
+    }
+    if (parsedJSON?.date) {
+        date = parsedJSON.date;
+    }
+    if (parsedJSON?.tags) {
+        tags = parsedJSON.tags;
+    }
+    var tagsHTML = '';
+    for (var j = 0; j < tags.length; j++) tagsHTML += `<span class="article-tag">${tags[j]}</span>`;
+    // tagsHTML = tagsHTML.slice(0, -1); // 去掉最后的顿号 '、'
+    
+    document.title = `good1210的博客 --- 文章：${title}`;
+    var html = await renderMarkdown(md);
+    html = `
+        <h1 style="text-align: center;">文章：${title}</h1>
+        <div>
+        <p>日期：${date}</p>
+        <p>标签：${tagsHTML}</p>
+        <i>Written & Provided by: good1210, the blog provider</i>
+        </div><hr>
+        ` + html;
+    document.getElementById('article').innerHTML = html;
+</script>
+
 </html>

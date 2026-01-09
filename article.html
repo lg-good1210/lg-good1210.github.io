@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- 引入图标库 -->
-     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <title>good1210的博客 --- 文章列表</title>
 </head>
 
@@ -48,10 +48,75 @@
                 </a></li>
         </ul>
     </div>
+    <div class="except-nav" data-noecpt>
+        <h1 style="text-align: center;">文章列表</h1>
+        <div class="list" id="article-list">
+            <h3>加载可能较慢，请耐心等待……</h3>
+        </div>
+    </div>
 </body>
-<script>
-    import { renderMarkdown } from '@/lib/mdx';
-    const html = await renderMarkdown(postContent);
+<script type="module">
+    import { getYamlMeta } from './lib/mdx.js';
+    const jsonContent = await fetch('./articles/md-list.json');
+    if (!jsonContent.ok) throw new Error('fetch failed');
+    const jsonText = await jsonContent.text();
+    const mdArray = JSON.parse(jsonText);
+
+    document.getElementById('article-list').innerHTML = '';
+    var HTMLresult = '<ul>';
+    for (var i = 0; i < mdArray.length; i++) {
+        const mdfilename = mdArray[i];
+        const postContent = await fetch(`./articles/${mdfilename}`);
+        if (!postContent.ok) throw new Error('fetch failed');
+        const md = await postContent.text();
+        const content = await getYamlMeta(md);
+        // 处理当前的 string 字符串，并加入 HTMLresult
+        const parsedJSON = content;
+        var title = '无标题', unknownTitle = true;
+        var date = '未知日期', unknownDate = true;
+        var tags = ['无标签'], unknownTags = true;
+
+        if (parsedJSON?.title) {
+            title = parsedJSON.title;
+            unknownTitle = false;
+        }
+        if (parsedJSON?.date) {
+            date = parsedJSON.date;
+            unknownDate = false;
+        }
+        if (parsedJSON?.tags) {
+            tags = parsedJSON.tags;
+            unknownTags = false;
+        }
+
+        var tagsHTML = '';
+        for (var j = 0; j < tags.length; j++) tagsHTML += `${tags[j]}、`;
+        tagsHTML = tagsHTML.slice(0, -1); // 去掉最后的顿号 '、'
+        // TODO: 拼接到 HTMLresult 中
+        if (unknownTitle || unknownDate || unknownTags) {
+            HTMLresult = HTMLresult + `
+            <li>
+                <h2>标题：${title}</h2>
+                <p>日期：${date}</p>
+                <p>标签：${tagsHTML}</p>
+                <p><i>文件名：${mdfilename}</i></p>
+                <p><i>注：这个文章无法访问可能是因为：缺失 Yaml 格式（标题、日期、标签）。</i></p>
+            </li>`;
+        } else {
+            const artviewURL = 'artview.html?mdfile=' + encodeURIComponent(mdfilename);
+            HTMLresult = HTMLresult + `
+            <li>
+                <a href="${artviewURL}"><h2>标题：${title}</h2></a>
+                <p>日期：${date}</p>
+                <p>标签：${tagsHTML}</p>
+                <p><i>文件名：${mdfilename}</i></p>
+            </li>`;
+        }
+        // TODO END
+    }
+    HTMLresult = HTMLresult + '</ul>';
+    document.getElementById('article-list').innerHTML = HTMLresult;
+    console.log('The article list has been loaded successfully.');
 </script>
 
 </html>

@@ -1,5 +1,8 @@
 .clock {
     display: flex;
+    flex-wrap: wrap;
+    /* 自动换行，适配移动端 */
+    justify-content: center;
     gap: 18px;
 }
 
